@@ -5,19 +5,35 @@
 version: '3.8'
 
 services:
-  rocketmq:
-    image: apache/rocketmq:${APP_VERSION}
-    container_name: ${APP_NAME}
+  namesrv:
+    image: apacherocketmq/rocketmq:4.5.0
+    container_name: ${APP_NAME}-namesrv
     ports:
-      - '${APP_MQ_PORT}:9876'
-    #volumes:
-    #  - 'rocketmq_data:/bitnami/suitecrm'
+      - 9876:9876
+    volumes:
+      - ./data/namesrv/logs:/home/rocketmq/logs
+    command: sh mqnamesrv
+  broker:
+    image: apacherocketmq/rocketmq:4.5.0
+    container_name: ${APP_NAME}-broker
+    links:
+      - namesrv
+    ports:
+      - 10909:10909
+      - 10911:10911
+    environment:
+      - NAMESRV_ADDR=namesrv:9876
+    volumes:
+      - ./data/broker/logs:/home/rocketmq/logs
+      - ./data/broker/store:/home/rocketmq/store
+      - ./data/broker/conf/broker.conf:/opt/rocketmq-4.5.0/conf/broker.conf
+    command: sh mqbroker -c /opt/rocketmq-4.5.0/conf/broker.conf
 
   rocketmqgui:
     image: apacherocketmq/rocketmq-dashboard:latest
     container_name: ${APP_NAME}-gui
     environment:
-     - JAVA_OPTS=-Drocketmq.namesrv.addr=rocketmq:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+     - JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
     restart: always
     ports:
       - ${APP_PORT}:8080 
