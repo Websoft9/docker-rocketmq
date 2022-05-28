@@ -1,5 +1,5 @@
 # image: https://registry.hub.docker.com/r/apache/rocketmq
-# docs: https://github.com/bitnami/bitnami-docker-suitecrm
+# image: https://registry.hub.docker.com/r/apacherocketmq/rocketmq-dashboard
 
 
 version: '3.8'
@@ -14,7 +14,7 @@ services:
     #  - 'rocketmq_data:/bitnami/suitecrm'
 
   rocketmqgui:
-    image: apacherocketmq/rocketmq-console:latest
+    image: apacherocketmq/rocketmq-dashboard:latest
     container_name: ${APP_NAME}-gui
     environment:
      - JAVA_OPTS=-Drocketmq.namesrv.addr=rocketmq:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
