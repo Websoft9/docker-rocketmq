@@ -6,7 +6,7 @@ version: '3.8'
 
 services:
   namesrv:
-    image: apacherocketmq/rocketmq:${APP_VERSION}
+    image: apache/rocketmq:${APP_VERSION}
     container_name: ${APP_NAME}-namesrv
     ports:
       - 9876:9876
@@ -14,7 +14,7 @@ services:
       - namesrv_log:/home/rocketmq/logs
     command: sh mqnamesrv
   broker:
-    image: apacherocketmq/rocketmq:${APP_VERSION}
+    image: apache/rocketmq:${APP_VERSION}
     container_name: ${APP_NAME}-broker
     links:
       - namesrv
