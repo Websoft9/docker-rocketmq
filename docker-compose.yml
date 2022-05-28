@@ -1,7 +1,6 @@
 # image: https://registry.hub.docker.com/r/apache/rocketmq
 # image: https://registry.hub.docker.com/r/apacherocketmq/rocketmq-dashboard
 
-
 version: '3.8'
 
 services:
