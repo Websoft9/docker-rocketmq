@@ -11,7 +11,7 @@ services:
     ports:
       - 9876:9876
     volumes:
-      - ./data/namesrv/logs:/home/rocketmq/logs
+      - namesrv_log:/home/rocketmq/logs
     command: sh mqnamesrv
   broker:
     image: apacherocketmq/rocketmq:4.5.0
