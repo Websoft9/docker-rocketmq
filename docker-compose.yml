@@ -6,7 +6,7 @@ version: '3.8'
 
 services:
   rocketmq:
-    image: apache/rocketmq:${APP_MQ_VERSION}
+    image: apache/rocketmq:${APP_VERSION}
     container_name: ${APP_NAME}
     ports:
       - '${APP_MQ_PORT}:9876'
@@ -14,7 +14,7 @@ services:
     #  - 'rocketmq_data:/bitnami/suitecrm'
 
   rocketmqgui:
-    image: apacherocketmq/rocketmq-console:${APP_VERSION}
+    image: apacherocketmq/rocketmq-console:latest
     container_name: ${APP_NAME}-gui
     environment:
      - JAVA_OPTS=-Drocketmq.namesrv.addr=rocketmq:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
