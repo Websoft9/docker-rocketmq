@@ -1,5 +1,6 @@
 # image: https://registry.hub.docker.com/r/apache/rocketmq
 # image: https://registry.hub.docker.com/r/apacherocketmq/rocketmq-dashboard
+# doc: https://github.com/silotrd/rocketmq-docker-compose/blob/master/docker-compose.yml
 
 version: '3.8'
 
