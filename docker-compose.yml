@@ -24,9 +24,9 @@ services:
     environment:
       - NAMESRV_ADDR=namesrv:9876
     volumes:
-      - ./data/broker/logs:/home/rocketmq/logs
-      - ./data/broker/store:/home/rocketmq/store
-      - ./data/broker/conf/broker.conf:/opt/rocketmq-4.5.0/conf/broker.conf
+      - broker_log:/home/rocketmq/logs
+      - broker_store:/home/rocketmq/store
+      - ./src/broker.conf:/opt/rocketmq-4.5.0/conf/broker.conf
     command: sh mqbroker -c /opt/rocketmq-4.5.0/conf/broker.conf
 
   rocketmqgui:
@@ -43,4 +43,6 @@ networks:
       name: ${APP_NAME}
 
 volumes:
-  rocketmq_data:
+  namesrv_log:
+  broker_log:
+  broker_store:
